@@ -55,8 +55,8 @@ public class TimelineActivity extends ActionBarActivity {
                 // deserialize json
                 // create models
                 // load model data into listview
-                ArrayList<Tweet> tweets = Tweet.fromJSONArray(json);
-                aTweets.addAll(tweets);
+                aTweets.addAll(Tweet.fromJSONArray(json));
+                Log.d("DEBUG", aTweets.toString());
             }
 
             // failure
@@ -64,7 +64,7 @@ public class TimelineActivity extends ActionBarActivity {
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                 // super.onFailure(statusCode, headers, throwable, errorResponse);
-                Log.d("DEBUG", errorResponse.toString());
+                // Log.d("DEBUG", errorResponse.toString());
             }
         });
     }
