@@ -6,6 +6,7 @@ import org.scribe.builder.api.TwitterApi;
 
 import android.app.DownloadManager;
 import android.content.Context;
+import android.util.Log;
 
 import com.codepath.oauth.OAuthBaseClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -63,7 +64,19 @@ public class TwitterClient extends OAuthBaseClient {
         params.put("since_id", 1);
         // execute request
         getClient().get(apiUrl, params, handler);
+        Log.d("DEBUG", " oauth client: " + getClient().toString());
     }
 
+    // METHOD = ENDPOINT
+    public void getOffsetTimeline(AsyncHttpResponseHandler handler, long offset) {
+        String apiUrl = getApiUrl("statuses/home_timeline.json");
+        // specify params
+        RequestParams params = new RequestParams();
+        params.put("count", 25);
+        params.put("max_id", offset - 1);
+        // execute request
+        getClient().get(apiUrl, params, handler);
+        Log.d("DEBUG", " params: " + params);
+    }
     // compose tweet
 }

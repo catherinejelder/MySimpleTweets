@@ -4,7 +4,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by celder on 3/10/15.
@@ -28,8 +31,20 @@ public class Tweet {
         return uid;
     }
 
-    public String getCreatedAt() {
+    private String getCreatedAt() {
         return createdAt;
+    }
+
+    public long getTimestamp() {
+        long timestamp = 0;
+        try {
+            String twitterTime = "EEE MMM dd HH:mm:ss ZZZZZ yyyy";
+            SimpleDateFormat df = new SimpleDateFormat(twitterTime);
+            timestamp = df.parse(getCreatedAt()).getTime();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return timestamp;
     }
 
     public User getUser() {

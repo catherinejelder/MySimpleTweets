@@ -11,10 +11,12 @@ import com.codepath.apps.mysimpletweets.R;
 import com.codepath.apps.mysimpletweets.TweetsArrayAdapter;
 import com.codepath.apps.mysimpletweets.TwitterApplication;
 import com.codepath.apps.mysimpletweets.TwitterClient;
+import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.apache.http.Header;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -51,11 +53,11 @@ public class TimelineActivity extends ActionBarActivity {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray json) {
                 //super.onSuccess(statusCode, headers, response);
-                Log.d("DEBUG", json.toString());
+                Log.d("DEBUG", "populateTimeline: json response: " + json.toString());
                 // deserialize json
                 // create models
                 // load model data into listview
-                aTweets.addAll(Tweet.fromJSONArray(json));
+                aTweets.addTweets(Tweet.fromJSONArray(json));
                 Log.d("DEBUG", aTweets.toString());
             }
 
@@ -64,10 +66,33 @@ public class TimelineActivity extends ActionBarActivity {
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                 // super.onFailure(statusCode, headers, throwable, errorResponse);
-                // Log.d("DEBUG", errorResponse.toString());
+                if (errorResponse != null) {
+                    Log.d("DEBUG", errorResponse.toString());
+                }
+            }
+        });
+
+        lvTweets.setOnScrollListener(new EndlessScrollListener() {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount) {
+                client.getOffsetTimeline(new JsonHttpResponseHandler() {
+
+                    public void onSuccess(int statusCode, Header[] headers, JSONArray json) {
+                        Log.d("DEBUG", "getOffsetTimeline: json response: " + json.toString());
+                        aTweets.addTweets(Tweet.fromJSONArray(json));
+                    }
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                        if (errorResponse != null) {
+                            Log.d("DEBUG", errorResponse.toString());
+                        }
+                    }
+                },
+                aTweets.getMinUidSeen());
             }
         });
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
