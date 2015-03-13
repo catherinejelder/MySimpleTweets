@@ -1,4 +1,4 @@
-package com.codepath.apps.mysimpletweets;
+package com.codepath.apps.mysimpletweets.models;
 
 import org.scribe.builder.api.Api;
 import org.scribe.builder.api.FlickrApi;
@@ -78,5 +78,15 @@ public class TwitterClient extends OAuthBaseClient {
         getClient().get(apiUrl, params, handler);
         Log.d("DEBUG", " params: " + params);
     }
+
     // compose tweet
+    public void postToTimeline(AsyncHttpResponseHandler handler, String text) {
+        String apiUrl = getApiUrl("statuses/update.json");
+        // specify params
+        RequestParams params = new RequestParams();
+        params.put("status", text);
+        // execute request
+        getClient().post(apiUrl, params, handler);
+        Log.d("DEBUG", "posting tweet with text: " + text);
+    }
 }
