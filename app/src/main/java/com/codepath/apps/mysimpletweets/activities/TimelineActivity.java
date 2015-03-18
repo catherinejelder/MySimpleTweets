@@ -36,13 +36,6 @@ public class TimelineActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timeline);
-        // get client
-        client = TwitterApplication.getRestClient(); // singletonClient
-        populateTimeline();
-        if (savedInstanceState == null) {
-            // access fragment
-            fragmentTweetsList = (TweetsListFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_timeline);
-        }
     }
 
 
@@ -54,39 +47,8 @@ public class TimelineActivity extends ActionBarActivity {
     }
 
 
-    // send api request to get timeline json
-    // fill listview by creating tweet objects from json
-    private void populateTimeline() {
-        client.getHomeTimeline(new JsonHttpResponseHandler() {
-            // success
 
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONArray json) {
-                //super.onSuccess(statusCode, headers, response);
-                Log.d("DEBUG", "populateTimeline: json response: " + json.toString());
-                // deserialize json
-                // create models
-                // load model data into listview
-                // aTweets.addTweets(Tweet.fromJSONArray(json));
-                fragmentTweetsList.addAll(Tweet.fromJSONArray(json));
-                Log.d("DEBUG", fragmentTweetsList.toString());
-            }
-
-            // failure
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                // super.onFailure(statusCode, headers, throwable, errorResponse);
-                if (errorResponse != null) {
-                    Log.d("DEBUG", errorResponse.toString());
-                }
-            }
-        });
-
-
-    }
-
-
+    // TODO: move this logic?
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will

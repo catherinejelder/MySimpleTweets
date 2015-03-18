@@ -1,9 +1,9 @@
 package com.codepath.apps.mysimpletweets.fragments;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 
-import com.codepath.apps.mysimpletweets.R;
 import com.codepath.apps.mysimpletweets.models.Tweet;
 import com.codepath.apps.mysimpletweets.models.TwitterApplication;
 import com.codepath.apps.mysimpletweets.models.TwitterClient;
@@ -16,8 +16,7 @@ import org.json.JSONObject;
 /**
  * Created by celder on 3/17/15.
  */
-public class HomeTimelineFragment extends TweetsListFragment {
-
+public class MentionsTimelineFragment extends TweetsListFragment {
     private TwitterClient client;
 
     public void onCreate(Bundle savedInstanceState) {
@@ -30,7 +29,7 @@ public class HomeTimelineFragment extends TweetsListFragment {
     // send api request to get timeline json
     // fill listview by creating tweet objects from json
     private void  populateTimeline() {
-        client.getHomeTimeline(new JsonHttpResponseHandler() {
+        client.getMentionsTimeline(new JsonHttpResponseHandler() {
             // success
 
             @Override
@@ -46,6 +45,7 @@ public class HomeTimelineFragment extends TweetsListFragment {
             }
 
             // failure
+
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                 // super.onFailure(statusCode, headers, throwable, errorResponse);

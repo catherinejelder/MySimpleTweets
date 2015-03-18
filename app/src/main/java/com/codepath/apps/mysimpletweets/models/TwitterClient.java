@@ -10,6 +10,7 @@ import android.util.Log;
 
 import com.codepath.oauth.OAuthBaseClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
 /*
@@ -88,5 +89,15 @@ public class TwitterClient extends OAuthBaseClient {
         // execute request
         getClient().post(apiUrl, params, handler);
         Log.d("DEBUG", "posting tweet with text: " + text);
+    }
+
+    public void getMentionsTimeline(JsonHttpResponseHandler handler) {
+        String apiUrl = getApiUrl("statuses/mentions_timeline.json");
+        // specify params
+        RequestParams params = new RequestParams();
+        params.put("count", 25);
+        // execute request
+        getClient().get(apiUrl, params, handler);
+        Log.d("DEBUG", " oauth client: " + getClient().toString());
     }
 }
