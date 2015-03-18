@@ -70,7 +70,7 @@ public class TweetsArrayAdapter extends ArrayAdapter<Tweet> {
         return convertView;
     }
 
-    public void addTweets(ArrayList<Tweet> tweets) {
+    public void addTweets(List<Tweet> tweets) {
         Log.d("DEBUG", "adding " + tweets.size() + " tweets to tweets array adapter");
 
         this.addAll(tweets);
