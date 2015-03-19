@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.codepath.apps.mysimpletweets.R;
 import com.codepath.apps.mysimpletweets.fragments.UserTimelineFragment;
@@ -13,9 +15,11 @@ import com.codepath.apps.mysimpletweets.models.TwitterApplication;
 import com.codepath.apps.mysimpletweets.models.TwitterClient;
 import com.codepath.apps.mysimpletweets.models.User;
 import com.loopj.android.http.JsonHttpResponseHandler;
+import com.squareup.picasso.Picasso;
 
 import org.apache.http.Header;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 public class ProfileActivity extends ActionBarActivity {
 
@@ -34,6 +38,7 @@ public class ProfileActivity extends ActionBarActivity {
                 user = User.fromJSON(response);
                 // current user's account info
                 getSupportActionBar().setTitle("@" + user.getScreenName());
+                populateProfileHeader(user);
             }
         });
 
@@ -48,6 +53,19 @@ public class ProfileActivity extends ActionBarActivity {
             ft.replace(R.id.flContainer, fragmentUserTimeline);
             ft.commit();
         }
+    }
+
+    private void populateProfileHeader(User user) {
+        TextView tvName = (TextView) findViewById(R.id.tvName); // full name
+        TextView tvTagline = (TextView) findViewById(R.id.tvTagline);
+        TextView tvFollowers = (TextView) findViewById(R.id.tvFollowers);
+        TextView tvFollowing = (TextView) findViewById(R.id.tvFollowing);
+        ImageView ivProfileImage = (ImageView) findViewById(R.id.ivProfileImage);
+        tvName.setText(user.getName());
+        tvTagline.setText(user.getTagline());
+        tvFollowers.setText(user.getFollowersCount() + " Followers");
+        tvFollowing.setText(user.getFollowersCount() + " Following");
+        Picasso.with(this).load(user.getProfileImageUrl()).into(ivProfileImage);
     }
 
 
