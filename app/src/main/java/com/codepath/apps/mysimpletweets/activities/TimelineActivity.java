@@ -55,6 +55,12 @@ public class TimelineActivity extends ActionBarActivity {
     }
 
 
+    public void onProfileView(MenuItem mi) {
+        // launch profile view
+        Intent i = new Intent(this, ProfileActivity.class);
+        startActivity(i);
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -72,16 +78,19 @@ public class TimelineActivity extends ActionBarActivity {
         Log.d("DEBUG", "TimelineActivity.onOptionsItemSelected called");
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            // navigate back to searchactivity
-            // creating an intent
-            Intent i = new Intent(TimelineActivity.this, ComposeTweetActivity.class);
-            // launch the new activity
-            startActivity(i);
+        /**
+         *         if (id == R.id.action_settings) {
+         // navigate back to searchactivity
+         // creating an intent
+         Intent i = new Intent(TimelineActivity.this, ComposeTweetActivity.class);
+         // launch the new activity
+         startActivity(i);
 
-            return true;
-        }
+         return true;
+         }
+         */
+        //noinspection SimplifiableIfStatement
+
 
         return super.onOptionsItemSelected(item);
     }
