@@ -1,5 +1,6 @@
 package com.codepath.apps.mysimpletweets.activities;
 
+import android.content.Intent;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -55,6 +56,12 @@ public class ProfileActivity extends ActionBarActivity {
         }
     }
 
+    public void onComposeTweet(MenuItem mi) {
+        // launch profile view
+        Intent i = new Intent(this, ComposeTweetActivity.class);
+        startActivity(i);
+    }
+
     private void populateProfileHeader(User user) {
         TextView tvName = (TextView) findViewById(R.id.tvName); // full name
         TextView tvTagline = (TextView) findViewById(R.id.tvTagline);
@@ -64,7 +71,7 @@ public class ProfileActivity extends ActionBarActivity {
         tvName.setText(user.getName());
         tvTagline.setText(user.getTagline());
         tvFollowers.setText(user.getFollowersCount() + " Followers");
-        tvFollowing.setText(user.getFollowersCount() + " Following");
+        tvFollowing.setText(user.getFollowingCount() + " Following");
         Picasso.with(this).load(user.getProfileImageUrl()).into(ivProfileImage);
     }
 
@@ -76,18 +83,18 @@ public class ProfileActivity extends ActionBarActivity {
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        // Handle action bar item clicks here. The action bar will
+//        // automatically handle clicks on the Home/Up button, so long
+//        // as you specify a parent activity in AndroidManifest.xml.
+//        int id = item.getItemId();
+//
+//        //noinspection SimplifiableIfStatement
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
+//
+//        return super.onOptionsItemSelected(item);
+//    }
 }

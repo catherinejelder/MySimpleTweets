@@ -69,31 +69,31 @@ public class TimelineActivity extends ActionBarActivity {
     }
 
 
-    // TODO: move this logic?
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        Log.d("DEBUG", "TimelineActivity.onOptionsItemSelected called");
-        int id = item.getItemId();
-
-        /**
-         *         if (id == R.id.action_settings) {
-         // navigate back to searchactivity
-         // creating an intent
-         Intent i = new Intent(TimelineActivity.this, ComposeTweetActivity.class);
-         // launch the new activity
-         startActivity(i);
-
-         return true;
-         }
-         */
-        //noinspection SimplifiableIfStatement
-
-
-        return super.onOptionsItemSelected(item);
-    }
+//    // TODO: move this logic?
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        // Handle action bar item clicks here. The action bar will
+//        // automatically handle clicks on the Home/Up button, so long
+//        // as you specify a parent activity in AndroidManifest.xml.
+//        Log.d("DEBUG", "TimelineActivity.onOptionsItemSelected called");
+//        int id = item.getItemId();
+//
+//        /**
+//         *         if (id == R.id.action_settings) {
+//         // navigate back to searchactivity
+//         // creating an intent
+//         Intent i = new Intent(TimelineActivity.this, ComposeTweetActivity.class);
+//         // launch the new activity
+//         startActivity(i);
+//
+//         return true;
+//         }
+//         */
+//        //noinspection SimplifiableIfStatement
+//
+//
+//        return super.onOptionsItemSelected(item);
+//    }
 
     // return order of fragments in the view pager
     public class TweetsPagerAdapter extends FragmentPagerAdapter {

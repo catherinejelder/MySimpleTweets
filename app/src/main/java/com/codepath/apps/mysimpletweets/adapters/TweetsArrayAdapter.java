@@ -59,7 +59,7 @@ public class TweetsArrayAdapter extends ArrayAdapter<Tweet> {
         // populate relative timestamp
         // add timestamp
         TextView timeCaption = (TextView) convertView.findViewById(R.id.timeCaption);
-        String relativeTimeSpanStr = DateUtils.getRelativeTimeSpanString(tweet.getTimestamp() / 1000, new Date().getTime() / 1000, 0).toString();
+        String relativeTimeSpanStr = DateUtils.getRelativeTimeSpanString(tweet.getTimestamp(), new Date().getTime(), 0).toString();
         Log.i("DEBUG", "tweet timestamp: " + tweet.getTimestamp() + ", current time: " + new Date().getTime());
         Log.i("DEBUG", "setting timeCaption text to: " + relativeTimeSpanStr);
         timeCaption.setText(relativeTimeSpanStr);
